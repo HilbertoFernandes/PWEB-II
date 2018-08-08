@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <meta http-equiv="Content-Language" content="pt-br"/>
+	<title><ui:insert name="ttitle">Biblioteca</ui:insert></title>
+	<h:outputStylesheet library="bootstrap" name="css/bootstrap.css" target="head" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/*"/>
+	<h:outputScript library="bootstrap" name="js/bootstrap.min.js" target="body" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</h:head>
+
+<h:body  style="background-image: url('../resources/imagens/fundo.jpg')">
+	<ui:insert name="theader">
+		<ui:include src="header.xhtml" />
+	</ui:insert>
+	<div class="container" style="margin-top: 50pt;">
+		<ui:insert name="tbody">
+		</ui:insert>
+	</div>
+</h:body>
+
+</html>

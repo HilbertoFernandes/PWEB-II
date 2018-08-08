@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:viewParam name="livros" value="#{livroBean.livros}" />
+</f:metadata>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		 <ui:define name="ttitle">Buscar livro</ui:define>
+		 <ui:define name="tbody">
+			<h:form id="formLivroslocalizados">
+				<p:tabView>
+					<p:tab title="Buscar Livro">
+			  <h:panelGrid>
+			 <p:outputLabel value="Informe o título ou autor desejados"
+					        style="margin-top:5%">
+			 </p:outputLabel>
+                           </h:panelGrid> 
+				           <h:panelGrid columns="3">
+                           <p:inputText id="counter" 
+                                        value="#{livroBean.argumento}">
+                                <p:ajax event="keyup" 
+                                        update="encontrados, msg" 
+                                        listener="#{livroBean.pesquisarLivro}" />
+                          </p:inputText>
+                         </h:panelGrid>
+                           <h:messages errorStyle="color:red" 
+								            infoStyle="color:blue"
+					                        layout="table"
+					                        id="msg" />
+                               <p:dataTable id="encontrados" 
+                                            value="#{livroBean.livros}" 
+                                            var="l">
+                         <p:column headerText="Título">
+                         #{l.titulo}
+                         </p:column>
+                         <p:column headerText="Autor">
+                         #{l.autor}
+                         </p:column>
+                          <p:column headerText="Exemplares disponíveis">
+                          #{l.quantidade}</p:column>
+                         </p:dataTable>
+				   </p:tab>
+			     </p:tabView>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

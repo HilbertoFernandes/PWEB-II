@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	 xmlns:h="http://xmlns.jcp.org/jsf/html"
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:component>
+	<h:panelGroup rendered="#{loginBean.usuarioLogado.perfil eq 'funcionario'}">
+		<h:form>  
+		  <p:menubar style="font-size:14pt; padding:10px">
+		    <p:menuitem url="../usuario/home.jsf?faces-redirect=true" >
+            <span class="glyphicon glyphicon-home"></span>
+            </p:menuitem>
+			    <p:submenu label="Livro" icon="ui-icon-note" style="margin-left:2%">
+				    <p:menuitem value="Novo" action="#{livroBean.goCadastro}" />
+				    <p:menuitem value="Acervo" action="#{livroBean.goLivros}" />
+			    </p:submenu>
+			    <p:submenu label="Usuário" icon="ui-icon-person">
+				    <p:menuitem value="Novo" action="#{usuarioBean.goCadastro}" />
+				    <p:menuitem value="Usuários" action="#{usuarioBean.goUsuarios}" />
+				    <p:menuitem value="Alterar Senha" action="/usuario/alterar_senha?faces-redirect=true" />
+			    </p:submenu>
+			    <p:submenu label="Empréstimo" icon="ui-icon-document">
+				    <p:menuitem value="Novo" action="#{emprestimoBean.goCadastro}" />
+				    <p:menuitem value="Empréstimos" action="#{emprestimoBean.goEmprestimos}" />
+			    </p:submenu>
+			    <p:submenu label="Consultas" icon="ui-icon-lightbulb">
+				    <p:menuitem value="Buscar livro" action="/livro/busca?faces-redirect=true"/> 
+				    <p:menuitem value="Buscar usuário" action="/usuario/busca?faces-redirect=true"/> 
+			    </p:submenu>
+			    <f:facet name="options">
+				    #{loginBean.usuarioLogado.nome}
+					(#{loginBean.usuarioLogado.perfil})
+				    <h:commandLink action="#{loginBean.logout}">Sair</h:commandLink>
+			    </f:facet>
+			
+		    </p:menubar>
+		</h:form>	
+	 </h:panelGroup>
+	 
+<!-- 	 Menu do aluno -->
+	 
+	 <h:panelGroup rendered="#{loginBean.usuarioLogado.perfil eq 'aluno'}">
+		 <h:form>
+			 <p:menubar style="font-size:14pt; padding:10px">
+				 <p:menuitem url="../usuario/home.jsf?faces-redirect=true" >
+			     	<span class="glyphicon glyphicon-home"></span>
+			     </p:menuitem>
+			     <p:menuitem value="Buscar Livro" action="/livro/busca?faces-redirect=true"/> 
+			     <p:menuitem value="Alterar Senha" action="/usuario/alterar_senha?faces-redirect=true" />
+				 <f:facet name="options">
+				 #{loginBean.usuarioLogado.nome}
+				 (#{loginBean.usuarioLogado.perfil})
+				 <h:commandLink action="#{loginBean.logout}">Sair</h:commandLink>
+				 </f:facet>
+			 </p:menubar>
+		 </h:form>	
+	 </h:panelGroup>
+	</ui:component>
+</html>

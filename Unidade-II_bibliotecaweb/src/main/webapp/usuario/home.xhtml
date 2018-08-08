@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<f:metadata>
+	<f:event type="preRenderView"
+		     listener="#{emprestimoBean.emprestimosUsuarioLogado}">
+    </f:event>
+</f:metadata>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="ttitle">BibliotecaWeb</ui:define>
+		<ui:define name="tbody">
+			<h:form id="formLivros">
+				<h:messages errorStyle="color:red"
+				            infoStyle="color:blue"
+					        layout="table" />
+				<p:tabView rendered="#{loginBean.usuarioLogado.perfil eq 'aluno'}">
+					<p:tab title="Empréstimos Cadastrados">
+						<h:dataTable var="emprestimo"
+							value="#{emprestimoBean.emprestimos}"
+							styleClass="table table-striped table-hover">
+							<h:column>
+								<f:facet name="header">Usuário</f:facet>
+					#{emprestimo.usuario.nome}
+				</h:column>
+							<h:column>
+								<f:facet name="header">Título</f:facet>
+					#{emprestimo.livro.titulo}
+				</h:column>
+							<h:column>
+								<f:facet name="header">Inicio</f:facet>
+								<h:outputText value="#{emprestimo.dataInicio}">
+									<f:convertDateTime dateStyle="short" />
+								</h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Fim</f:facet>
+								<h:outputText value="#{emprestimo.dataFim}">
+									<f:convertDateTime dateStyle="short" />
+								</h:outputText>
+							</h:column>
+							<h:column>
+								    <p:commandLink action="#{emprestimoBean.renovar(emprestimo)}"
+									               value="Renovar"
+									               rendered="#{emprestimo.status == true and emprestimo.renovado == false}"
+									               style="width:30%; 
+									               color:green; 
+									               padding:20px">
+									</p:commandLink>
+									
+								   <h:outputText value="Renovado"
+									             rendered="#{emprestimo.renovado == true}"
+									             style="margin-left:10%">
+								   </h:outputText>
+								   
+								   <h:outputText value="Encerrado"
+									             rendered="#{emprestimo.status == false}"
+									             style="margin-left:10%">
+									</h:outputText>
+										
+							</h:column>
+						</h:dataTable>
+					</p:tab>
+				</p:tabView>
+			</h:form>
+				<!--para o jquery funcionar -->
+				<p:calendar rendered="" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
